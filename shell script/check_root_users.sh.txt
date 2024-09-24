@@ -1,0 +1,16 @@
+#!/bin/bash
+
+################################
+#Author :Nyasa Singh
+#Date : 13-09-2024
+#
+#Script to check the users list having root permissions 
+##################################
+
+echo "Users with root privileges:"
+
+# Check for users with UID 0 (the root user)
+echo "Users with UID 0:"
+awk -F: '($3 == 0) {print $1}' /etc/passwd
+
+echo "Done."

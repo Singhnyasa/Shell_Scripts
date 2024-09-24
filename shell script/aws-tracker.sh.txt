@@ -1,0 +1,27 @@
+#!/bin/bash
+
+##############
+#Author: Nyasa
+#date: 08-09-2024
+#
+#Script will report the AWS resource usage
+##############
+# track
+# AWS S3
+# AWs Ec2
+# AWS Lambda
+# AWS IAM Users
+
+set -x #debug mode
+
+# list s3 buckets
+aws s3 ls
+
+# list EC2 Instances
+aws ec2 describe-instances
+
+# list lambda
+aws lambda list-functions
+
+# list IAM users
+aws iam list-users

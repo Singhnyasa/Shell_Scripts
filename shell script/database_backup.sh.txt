@@ -1,0 +1,29 @@
+#!/bin/bash
+
+###############################
+#Name:Nyasa
+#Date:06-09-2024
+#
+#Script to automate the  backup of databases
+##############################
+
+#Configuration
+DB_USER="root"
+DB_PASSWORD="9752659019"
+DB_NAME="student"
+BACKUP_DIR="/backup/temp"
+TIMESTAMP=$(date)
+BACKUP_FILE="$BACKUP_DIR/$DB_NAME-$TIMESTAMP.sql"
+
+
+#Create backup
+
+echo "Starting backup of database $DB_NAME..."
+mysqldump -u "$DB_USER" -p "$DB_PASSWORD" "$DB_NAME" > "$BACKUP_FILE"
+
+if [ "$?" -eq 0 ];
+then
+        echo "Backup Successful: $BACKUP_FILE"
+else
+        echo "Backup Failed."
+fi

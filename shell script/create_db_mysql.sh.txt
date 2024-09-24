@@ -1,0 +1,24 @@
+#!/bin/bash
+
+################################
+#Author :Nyasa Singh
+#Date : 10-09-2024
+#
+#Script to create database 
+##################################
+
+
+#Database credentials
+DB_USER="root"
+DB_PASS="1234"
+DB_NAME="Student"
+
+
+#Create the database
+mysql -u $DB_USER -p$DB_PASS -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+
+if [ $? -eq 0 ]; then
+    echo "Database '$DB_NAME' created successfully."
+else
+    echo "Failed to create database '$DB_NAME'."
+fi

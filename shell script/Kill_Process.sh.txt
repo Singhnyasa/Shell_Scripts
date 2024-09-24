@@ -1,0 +1,39 @@
+#!/bin/bash
+
+################################
+#Author :Nyasa Singh
+#Date : 11-09-2024
+#
+#Script to kill a process in Linux system
+##################################
+
+
+# Check if the user provided a process name or ID
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <bash>"
+    exit 1
+fi
+
+PROCESS=$1
+
+# Check if the input is a PID (numeric)
+if [[ "$PROCESS" =~ ^[0-9]+$ ]]; then
+    PID=$PROCESS
+else
+    # Find the process ID by name
+    PID=$(pgrep -f "$PROCESS")
+    
+    if [ -z "$PID" ]; then
+        echo "Process '$PROCESS' not found."
+        exit 1
+    fi
+fi
+
+# Kill the process
+kill $PID
+
+if [ $? -eq 0 ]; then
+    echo "Process '$PROCESS' (PID: $PID) killed successfully."
+else
+    echo "Failed to kill process '$PROCESS'."
+fi

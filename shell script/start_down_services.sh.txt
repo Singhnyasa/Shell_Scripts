@@ -1,0 +1,35 @@
+#!/bin/bash
+
+################################
+#Author :Nyasa Singh
+#Date : 09-09-2024
+#
+#Script to start a down service in system automatically
+##################################
+
+
+#check if the scrip is run with root privileges
+if [ "$EUID" -ne 0 ];
+then
+                echo "Please run as root"
+                exit 1
+fi
+
+#Function to start services that are not running
+
+start_down_services(){
+
+    echo "Checking for services that are down..."
+
+    #List all units of type service
+    services = $(systemctl list-units --type=service --state=inactive --no-pager --quiet | awk '{print $1}')
+
+    #Loop through each service abd attempt to start it
+    for service in $services; do
+            echo "Attempting to start $service";
+            systemctl start "$service"
+
+
+            #Check if the service started successfully
+            if systemctl is-active --quiet "$service";then
+                    echo "$service started successfully."
